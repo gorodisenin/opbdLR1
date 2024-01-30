@@ -1,0 +1,54 @@
+import tkinter as tk
+
+def draw_shape():
+    x = int(x_entry.get())
+    y = int(y_entry.get())
+    width = int(width_entry.get())
+    height = int(height_entry.get())
+    shape_type = shape_var.get()
+
+    canvas.delete("all")
+
+    if shape_type == "oval":
+        canvas.create_oval(x, y, x + width, y + height, fill="blue")
+    elif shape_type == "rectangle":
+        canvas.create_rectangle(x, y, x + width, y + height, fill="red")
+
+root = tk.Tk()
+root.title("Draw Shape")
+
+canvas = tk.Canvas(root, width=400, height=400)
+canvas.pack()
+
+x_label = tk.Label(root, text="X:")
+x_label.pack()
+x_entry = tk.Entry(root)
+x_entry.pack()
+
+y_label = tk.Label(root, text="Y:")
+y_label.pack()
+y_entry = tk.Entry(root)
+y_entry.pack()
+
+width_label = tk.Label(root, text="ширина:")
+width_label.pack()
+width_entry = tk.Entry(root)
+width_entry.pack()
+
+height_label = tk.Label(root, text="высота:")
+height_label.pack()
+height_entry = tk.Entry(root)
+height_entry.pack()
+
+shape_var = tk.StringVar()
+shape_var.set("oval")
+
+oval_radio = tk.Radiobutton(root, text="овал", variable=shape_var, value="oval")
+oval_radio.pack()
+rect_radio = tk.Radiobutton(root, text="прямоугольник", variable=shape_var, value="rectangle")
+rect_radio.pack()
+
+draw_button = tk.Button(root, text="показать", command=draw_shape)
+draw_button.pack()
+
+root.mainloop()
