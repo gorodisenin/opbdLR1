@@ -1,0 +1,37 @@
+from tkinter import *
+
+
+class Frame(Tk):
+
+    def __init__(self):
+        super().__init__()
+        self.geometry("70x70")
+
+        self.l1 = Label(text="", width=50)
+        self.e1 = Entry(width=50, justify=CENTER)
+
+        colors = {'#ff0000': 'красный',
+               '#ff7d00': 'оранжевый',
+               '#ffff00': 'желтый',
+               '#00ff00': 'зеленый',
+               '#00BFFF': 'голубой',
+               '#0000ff': 'синий',
+               '#9932CC': 'фиолетовый'}
+
+        for color in colors.keys():
+            func = lambda c=color, code=colors[color]: self.on_button_click(c, code)
+            b = Button(text='', command=func, bg=color, width=1, height=1)
+            self.l1.pack()
+            self.e1.pack()
+            b.pack(side='left')
+
+
+    def on_button_click(self, color_name, color_code):
+        self.e1.delete(0, END)
+        self.e1.insert(0, color_name)
+        self.l1['text'] = color_code
+
+
+if __name__ == '__main__':
+    root = Frame()
+    root.mainloop()
