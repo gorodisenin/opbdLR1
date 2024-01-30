@@ -1,0 +1,37 @@
+from tkinter import *
+
+def shopping_list():
+    selected_items = list(listbox1.curselection())  # Convert to list to avoid changing size during iteration
+    selected_items.reverse()  # Reverse the list to delete from the end
+    for item in selected_items:
+        listbox2.insert(END, listbox1.get(item))
+        listbox1.delete(item)
+
+def product_list():
+    selected_items = list(listbox2.curselection())  # Convert to list to avoid changing size during iteration
+    selected_items.reverse()  # Reverse the list to delete from the end
+    for item in selected_items:
+        listbox1.insert(END, listbox2.get(item))
+        listbox2.delete(item)
+
+root = Tk()
+
+listbox1 = Listbox(root, selectmode=MULTIPLE)
+items = ["яблоко", "банан", "морковь", "хлеб", "масло", "мясо", "картофель", "ананас"]
+for item in items:
+    listbox1.insert(END, item)
+listbox1.pack()
+
+shopping_button = Button(root, text="во  второй список", command=shopping_list)
+shopping_button.pack()
+
+product_button = Button(root, text="в первый список", command=product_list)
+product_button.pack()
+
+listbox2 = Listbox(root, selectmode=MULTIPLE)
+items = ["помидор", "молоко"]
+for item in items:
+    listbox2.insert(END, item)
+listbox2.pack()
+
+root.mainloop()
