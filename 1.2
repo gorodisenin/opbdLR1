@@ -1,0 +1,30 @@
+import tkinter as tk
+
+def show_color_code(color):
+    color_code = color_codes.get(color, "Неизвестный цвет")
+    label.config(text=f"Код цвета: {color_code}")
+
+color_codes = {
+    "Красный": "#FF0000",
+    "Оранжевый": "#FFA500",
+    "Желтый": "#FFFF00",
+    "Зеленый": "#008000",
+    "Голубой": "#00FFFF",
+    "Синий": "#0000FF",
+    "Фиолетовый": "#800080"
+}
+
+root = tk.Tk()
+root.title("Радужные кнопки")
+
+frame = tk.Frame(root)
+frame.pack(pady=10)
+
+for color, color_code in color_codes.items():
+    button = tk.Button(frame, text=color, bg=color_code, fg='white', command=lambda c=color: show_color_code(c))
+    button.pack(fill='x', padx=5, pady=5)
+
+label = tk.Label(root, text="Нажмите на кнопку для выбора цвета")
+label.pack(pady=10)
+
+root.mainloop()
