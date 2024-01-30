@@ -1,0 +1,43 @@
+import tkinter as tk
+from tkinter import messagebox, filedialog
+
+def load_file():
+    try:
+        file_path = filedialog.askopenfilename()
+        with open(file_path, 'r') as file:
+            content = file.read()
+        text_area.delete('1.0', tk.END)
+        text_area.insert(tk.END, content)
+        messagebox.showinfo("готово", "файл загружен успешно.")
+    except Exception as e:
+        messagebox.showerror("ошибка", "файл не удалось загрузить .")
+
+def save_file():
+    try:
+        file_path = filedialog.asksaveasfilename(defaultextension=".txt")
+        with open(file_path, 'w') as file:
+            file.write(text_area.get('1.0', tk.END))
+        messagebox.showinfo("Success", "File saved successfully.")
+    except Exception as e:
+        messagebox.showerror("Error", "Failed to save the file.")
+
+def clear_text():
+    if messagebox.askyesno("Confirmation", "вы хотите очистить текстовое поле?"):
+        text_area.delete('1.0', tk.END)
+
+root = tk.Tk()
+root.title("Text Editor")
+
+text_area = tk.Text(root, height=10, width=50)
+text_area.pack()
+
+load_button = tk.Button(root, text="загрузить файл", command=load_file)
+load_button.pack(side=tk.LEFT, padx=(50, 20))
+
+save_button = tk.Button(root, text="созранить файл", command=save_file)
+save_button.pack(side=tk.LEFT, padx=(20, 50))
+
+clear_button = tk.Button(root, text="очистить", command=clear_text)
+clear_button.pack(side=tk.LEFT)
+
+root.mainloop()
